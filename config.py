@@ -1,12 +1,19 @@
 """
 config.py — токены и настройки
+Локально: читает из .env файла
+Railway: читает из Variables (переменные окружения)
 """
 
 import os
 import sys
-from dotenv import load_dotenv
 
-load_dotenv()
+# Пробуем загрузить .env если он есть (локально)
+# На Railway .env нет — берётся из Variables автоматически
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
